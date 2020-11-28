@@ -18,6 +18,7 @@ const PangeasProducts = (props: any) => {
         networkStatus
     } = props;
     const avatarStyles = useDynamicAvatarStyles({ size: 180 });
+    const avatarStylesMobile = useDynamicAvatarStyles({ size: 100 });
     const matches = useMediaQuery('(min-width:768px)');
     const classes = ProductStyle();
 
@@ -31,13 +32,13 @@ const PangeasProducts = (props: any) => {
                                 <Grid key={index} item xs={matches ? 4 : 6}>
                                     <Column alignItems="center" gap={1} mt={1} mb={10}>
                                         <Item>
-                                            <Avatar classes={avatarStyles} variant="square" src={prod.image_url} />
+                                            <Avatar classes={matches ? avatarStyles : avatarStylesMobile} variant="square" src={prod.image_url} />
                                         </Item>
                                         <Item>
-                                            <Typography color="textSecondary">{prod.title}</Typography>
+                                            <Typography align="center" color="textSecondary">{prod.title}</Typography>
                                         </Item>
                                         <Item>
-                                            <Typography>{takenCurrency} {prod.price}</Typography>
+                                            <Typography align="center">{takenCurrency} {prod.price}</Typography>
                                         </Item>
                                         <Item>
                                             <Button onClick={() => addItem(prod)}>Add to Cart</Button>

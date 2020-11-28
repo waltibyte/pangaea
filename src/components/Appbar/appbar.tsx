@@ -22,26 +22,30 @@ const TopBar = (props: TProps) => {
                         <Item mr={6}>
                             <Typography style={{ marginRight: 20, letterSpacing: 20 }}>LUMIN</Typography>
                         </Item>
-                        <Item>
-                            <Hidden mdDown>
+                        <Hidden mdDown>
+                            <Item>
                                 <Typography>Shop</Typography>
-                            </Hidden>
-                        </Item>
-                        <Item>
-                            <Typography>Learn</Typography>
-                        </Item>
+                            </Item>
+                        </Hidden>
+                        <Hidden mdDown>
+                            <Item>
+                                <Typography>Learn</Typography>
+                            </Item>
+                        </Hidden>
                     </Row>
                     <Row gap={2} alignItems="center">
-                        <Item>
-                            <Typography>Accounts</Typography>
-                        </Item>
+                        <Hidden mdDown>
+                            <Item>
+                                <Typography>Accounts</Typography>
+                            </Item>
+                        </Hidden>
                         <Item>
                             <Badge
                                 badgeContent={totalQuantityInCart}
                                 style={{ cursor: 'pointer ' }}
                                 anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
+                                    vertical: 'top',
+                                    horizontal: 'right',
                                 }}
                                 onClick={clicked(true)}
                                 color="primary">
