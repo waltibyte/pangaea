@@ -19,6 +19,7 @@ Note: Also designed and optimized for mobile
 
 See screenshot
 
+![alt text](https://raw.githubusercontent.com/waltibyte/pangaea/main/src/assets/mobile%20view%20homepage.PNG)
 
 Added features:
 
