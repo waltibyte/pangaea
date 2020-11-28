@@ -16,6 +16,11 @@ const LayoutStyle = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    containerBoxMobile: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
     statusTop: {
         width: '100%',
         height: 25,

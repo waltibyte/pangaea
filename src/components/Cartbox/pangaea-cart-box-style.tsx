@@ -13,7 +13,8 @@ const PangaeaCartBoxStyle = makeStyles((theme) => ({
     },
     firstNormalBtn: {
         backgroundColor: '#ffffff',
-        height: 24,
+        height: 20.8,
+        marginTop: 0.6,
         boxSizing: 'border-box',
         borderRight: 0,
         borderTop: '1px solid rgba(0,0,0, 0.2)',
@@ -21,13 +22,14 @@ const PangaeaCartBoxStyle = makeStyles((theme) => ({
         borderBottom: '1px solid rgba(0,0,0, 0.2)'
     },
     spanBox: {
-        paddingBottom: 0.6,
+        paddingBottom: 0.8,
         borderTop: '1px solid rgba(0,0,0, 0.2)',
         borderBottom: '1px solid rgba(0,0,0, 0.2)',
     },
     secNormalBtn: {
         backgroundColor: '#ffffff',
-        height: 24,
+        height: 20.8,
+        marginTop: 0.6,
         boxSizing: 'border-box',
         borderLeft: 0,
         borderTop: '1px solid rgba(0,0,0, 0.2)',

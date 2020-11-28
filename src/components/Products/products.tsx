@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Column, Item } from '@mui-treasury/components/flex';
 import { useDynamicAvatarStyles } from '@mui-treasury/styles/avatar/dynamic';
 import ProductStyle from './product-style';
+import { Product } from '../../model/api-model';
 
 const PangeasProducts = (props: any) => {
     const {
@@ -26,7 +27,7 @@ const PangeasProducts = (props: any) => {
                 <Grid container direction="row">
                     {
                         (!currencyQueryLoading && !productsQueryLoading && !productsQueryError) && networkStatus ?
-                            productData?.products.map((prod: any, index: any) => (
+                            productData?.products.map((prod: Product, index: number) => (
                                 <Grid key={index} item xs={matches ? 4 : 6}>
                                     <Column alignItems="center" gap={1} mt={1} mb={10}>
                                         <Item>
@@ -57,7 +58,7 @@ const PangeasProducts = (props: any) => {
                                     </Column>
                                 </Box>
                                 :
-                                Array.from(Array(10).keys()).map((prod: any, index: any) => (
+                                Array.from(Array(10).keys()).map((prod: any, index: number) => (
                                     <Grid key={index} item xs={4}>
                                         <Column alignItems="center" gap={1}>
                                             <Item>

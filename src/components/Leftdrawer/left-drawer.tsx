@@ -19,6 +19,8 @@ const TemporaryDrawer = React.forwardRef<HTMLDivElement, any>((props: any, ref) 
         currencyData,
         onCurrencySelected,
         takenCurrency,
+        totalQuantityInCart,
+        removeProdFromCart
     } = props;
     const classes = LeftDrawerStyle();
 
@@ -38,7 +40,12 @@ const TemporaryDrawer = React.forwardRef<HTMLDivElement, any>((props: any, ref) 
                             <ExpandMoreIcon className={classes.icon} onClick={clicked(false)} />
                         </Item>
                         <Item width={'50%'}>
-                            <Typography variant="subtitle2" style={{ fontSize: 10 }} color="textSecondary" align="center">YOUR CART</Typography>
+                            <Row alignItems="center">
+                                <Item>
+                                    <Typography variant="subtitle2" style={{ fontSize: 10 }} color="textSecondary" align="center">YOUR CART</Typography>
+                                </Item>
+                                <Box component="span" className={classes.qInCart}>{totalQuantityInCart}</Box>
+                            </Row>
                         </Item>
                     </Row>
                 </Item>
@@ -47,10 +54,11 @@ const TemporaryDrawer = React.forwardRef<HTMLDivElement, any>((props: any, ref) 
                 </Item>
                 <Item>
                     <PangaeaCartBox
-                    cartStorage={cartStorage}
-                    addItem={addItem}
-                    takenCurrency={takenCurrency}
-                    removeCart={removeCart}       
+                        cartStorage={cartStorage}
+                        addItem={addItem}
+                        takenCurrency={takenCurrency}
+                        removeProdFromCart={removeProdFromCart}
+                        removeCart={removeCart}
                     />
                 </Item>
             </Column>

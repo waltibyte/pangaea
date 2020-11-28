@@ -30,6 +30,15 @@ const LeftDrawerStyle = makeStyles(theme => ({
         border: '1px solid rgb(0,0,0, 0.5)',
         padding: 4,
         borderRadius: 0
+    },
+    qInCart: {
+        borderRadius: '5px',
+        paddingLeft: 5,
+        paddingRight: 5,
+        paddingBottom: 1,
+        fontSize: 10,
+        backgroundColor: theme.palette.primary.main,
+        color: '#ffffff'
     }
 }));
 

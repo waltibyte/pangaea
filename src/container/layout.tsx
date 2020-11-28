@@ -7,13 +7,17 @@ import TemporaryDrawer from '../components/Leftdrawer/left-drawer'
 import { useQuery } from '@apollo/client';
 import PangeasProducts from '../components/Products/products'
 import * as _gQl from '../graphql/graphql-queries'
+import { addItemToCart, compareObjectForCartUpdate, removeItemFromCart, removeProductFromCart } from '../utilities';
 import PangaeaSelectFilter from '../components/UI/pangaea-select-filter/select-filter'
+import { CardProduct, Product } from '../model/api-model';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 const Layout = (props: any) => {
     const classes = LayoutStyle();
     const [drawerState, setDrawerState] = useState(false); // Drawer state for toggling the sidebar
-    const [cartStorage, setCartStorage] = useState<Array<any>>([]); // State for storing cart, can use session storage or any other preferred storage here for a real world project
-
+    const [cartStorage, setCartStorage] = useState<Array<CardProduct>>([]); // State for storing cart, can use session storage or any other preferred storage here for a real world project
+    const matches = useMediaQuery('(min-width:768px)');
 
     /**
      *  I used React Apollo client useQuery hook to process my query and make a call while capturing loading state, errors and retrieving the data
@@ -28,6 +32,8 @@ const Layout = (props: any) => {
             variables: { takenCurrency },
             notifyOnNetworkStatusChange: true
         });
+
+    const totalQuantityInCart = cartStorage.reduce((initial, current) => initial + current.qty, 0);
 
 
     const toggleDrawer = (actionType: boolean) => (event: any) => {
@@ -50,14 +56,27 @@ const Layout = (props: any) => {
         refetch({ takenCurrency });
     }
 
+    useMemo(() => {
+        if (selectedCurrency && cartStorage.length > 0 && productData?.products.length > 0) {
+            compareObjectForCartUpdate(cartStorage, productData?.products);
+        }
+    }, [selectedCurrency, productData?.products]);
+
 
     // Method that initiates adds to cart
-    const addItem = (prod: any) => {
+    const addItem = (prod: Product) => {
         setDrawerState(true);
+        addItemToCart(prod, cartStorage, setCartStorage);
     }
 
     // Method that initiates remove quantity if more than one or remove item from cart
     const deductItem = (prodId: any) => {
+        removeItemFromCart(prodId, cartStorage, setCartStorage)
+    }
+
+    // Method that initiates remove product from cart
+    const removeProdFromCart = (prodId: number) => {
+        removeProductFromCart(prodId, cartStorage, setCartStorage);
     }
 
     return (
@@ -65,12 +84,12 @@ const Layout = (props: any) => {
             {/* <Box className={classes.statusTop}>
                 <Typography variant="caption">Due to a strain on courier services due to COVID-19 and increased customer demand, there is currently</Typography>
             </Box> */}
-            <TopBar clicked={toggleDrawer} />
+            <TopBar clicked={toggleDrawer} totalQuantityInCart={totalQuantityInCart} />
             <Toolbar />
             <Column>
                 <Item>
                     <Paper className={classes.paperRoot} >
-                        <Container className={classes.containerBox}>
+                        <Container className={matches ? classes.containerBox : classes.containerBoxMobile}>
                             <Column gap={1}>
                                 <Item>
                                     <Typography variant="h4"> All Products </Typography>
@@ -110,6 +129,8 @@ const Layout = (props: any) => {
                 drawerState={drawerState}
                 currencyData={currencyData}
                 onCurrencySelected={onCurrencySelected}
+                removeProdFromCart={removeProdFromCart}
+                totalQuantityInCart={totalQuantityInCart}
             />
         </Box>
     )

@@ -1,15 +1,16 @@
 import React from 'react';
-import { AppBar, Box, Toolbar, Typography, Badge } from '@material-ui/core';
+import { AppBar, Box, Toolbar, Typography, Badge, Hidden } from '@material-ui/core';
 import AppBarStyle from './appbar-style';
 import { Row, Item } from '@mui-treasury/components/flex';
 import { ShoppingCart } from 'react-feather';
 
 type TProps = {
-    clicked: any
+    clicked: any,
+    totalQuantityInCart: any
 }
 
 const TopBar = (props: TProps) => {
-    const { clicked } = props;
+    const { clicked, totalQuantityInCart } = props;
 
     const classes = AppBarStyle();
 
@@ -22,7 +23,9 @@ const TopBar = (props: TProps) => {
                             <Typography style={{ marginRight: 20, letterSpacing: 20 }}>LUMIN</Typography>
                         </Item>
                         <Item>
-                            <Typography>Shop</Typography>
+                            <Hidden mdDown>
+                                <Typography>Shop</Typography>
+                            </Hidden>
                         </Item>
                         <Item>
                             <Typography>Learn</Typography>
@@ -34,14 +37,14 @@ const TopBar = (props: TProps) => {
                         </Item>
                         <Item>
                             <Badge
-                            badgeContent={4}
-                            style={{ cursor: 'pointer ' }}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                              }}
-                              onClick={clicked(true)}
-                              color="primary">
+                                badgeContent={totalQuantityInCart}
+                                style={{ cursor: 'pointer ' }}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                onClick={clicked(true)}
+                                color="primary">
                                 <ShoppingCart size={18} />
                             </Badge>
                         </Item>

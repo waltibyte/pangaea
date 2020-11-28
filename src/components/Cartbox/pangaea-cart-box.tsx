@@ -9,13 +9,14 @@ import PangaeaCartBoxStyle from './pangaea-cart-box-style';
 type CartBoxProps = {
     cartStorage: Array<any>,
     addItem: any,
+    removeProdFromCart: any,
     removeCart: any,
     takenCurrency: any,
     total: any
 }
 
 const PangaeaCartBox = (props: CartBoxProps) => {
-    const {cartStorage, addItem, removeCart, takenCurrency} = props;
+    const {cartStorage, addItem, removeProdFromCart, removeCart, takenCurrency} = props;
     const avatarStyles = useDynamicAvatarStyles({ size: 30 });
     const classes = PangaeaCartBoxStyle();
 
@@ -28,7 +29,7 @@ const PangaeaCartBox = (props: CartBoxProps) => {
                 return (
                     <Item mb={1} key={index}>
                         <Paper className={classes.paperRoot}>
-                            <X className="icon-x" size={10} />
+                            <X className="icon-x" size={10} style={{ cursor: 'pointer' }} onClick={() => removeProdFromCart(id)} />
                             <Column gap={1} px={1.5}>
                                 <Item>
                                     <Typography variant="body2"> {title} </Typography>
@@ -67,6 +68,7 @@ const PangaeaCartBox = (props: CartBoxProps) => {
 PangaeaCartBox.propTypes = {
   addItem: PropTypes.func,
   cartStorage: PropTypes.any,
+  removeProdFromCart: PropTypes.any,
   removeCart: PropTypes.func,
   takenCurrency: PropTypes.any,
   total: PropTypes.any
