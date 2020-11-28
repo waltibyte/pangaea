@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@material-ui/core/styles';
+import pagaemTheme from './theme/pagaem-theme';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './graphql/graphql-config'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ThemeProvider theme={pagaemTheme}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
